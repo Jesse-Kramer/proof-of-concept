@@ -49,19 +49,17 @@ body{
     align-items: center;
     justify-content: space-between;
     width: 100vw;
-    max-width: 1500px;
+    max-width: 1300px;
     margin: auto;
     padding: 20px;
+	overflow: auto;
+	scroll-snap-type: x mandatory;
 }
 
 .carousel-item {
     flex: 0 0 100%;
-    max-width: 1500px;
-    display: none;
-}
-
-.carousel-item.active {
-    display: block;
+	scroll-snap-align: center;
+	margin: 0 20px 0 20px;
 }
 
 .carousel-btn {
@@ -236,10 +234,6 @@ h2 {
 @media (min-width: 1560px) {}
 
 /* View transitions */
-
-.carousel-item .grid-container {
-	view-transition-name: content;
-}
 
 ::view-transition-group(*) {
 	animation-duration: .75;

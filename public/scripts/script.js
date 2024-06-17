@@ -1,89 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const carousel = document.querySelector('.carousel-container');
-    const slides = document.querySelectorAll('.carousel-item');
+const carouselContainer = document.querySelector('.carousel-container');
+const slides = document.querySelectorAll(".carousel-item");
+const prevButtons = document.querySelectorAll(".carousel-btn.prev");
+const nextButtons = document.querySelectorAll(".carousel-btn.next");
 
-    // Function to update the state of buttons on all slides
-    function updateButtonStates() {
-        slides.forEach(slide => {
-            const prevBtn = slide.querySelector('.carousel-btn.prev');
-            const nextBtn = slide.querySelector('.carousel-btn.next');
-            const prevSlide = slide.previousElementSibling;
-            const nextSlide = slide.nextElementSibling;
-
-            if (prevBtn) {
-                prevBtn.disabled = !prevSlide;
-            }
-
-            if (nextBtn) {
-                nextBtn.disabled = !nextSlide;
-            }
-        });
+function updateButtonState(prevButton, nextButton) {
+    if (carouselContainer.scrollLeft <= 45) {
+        prevButton.disabled = true;
+    } else {
+        prevButton.disabled = false;
     }
 
-    // Function to handle click on previous button
-    function prevSlide(event) {
-        const currentSlide = event.target.closest('.carousel-item');
-        const prevSlide = currentSlide.previousElementSibling;
-
-        if (prevSlide) {
-            if (!document.startViewTransition) {
-                currentSlide.classList.remove('active');
-                prevSlide.classList.add('active');
-                updateButtonStates();
-                return;
-            }
-
-            // With a transition:
-            document.startViewTransition({
-                update: () => {
-                    currentSlide.classList.remove('active');
-                    prevSlide.classList.add('active');
-                },
-                types: ['backwards'],
-            }).then(() => updateButtonStates());
-        }
+    if (carouselContainer.scrollLeft + carouselContainer.clientWidth + 45 >= carouselContainer.scrollWidth) {
+        nextButton.disabled = true;
+    } else {
+        nextButton.disabled = false;
     }
+}
 
-    // Function to handle click on next button
-    function nextSlide(event) {
-        const currentSlide = event.target.closest('.carousel-item');
-        const nextSlide = currentSlide.nextElementSibling;
+slides.forEach((slide, index) => {
+    const prevButton = prevButtons[index];
+    const nextButton = nextButtons[index];
 
-        if (nextSlide) {
-            if (!document.startViewTransition) {
-                currentSlide.classList.remove('active');
-                nextSlide.classList.add('active');
-                updateButtonStates();
-                return;
-            }
+    updateButtonState(prevButton, nextButton);
 
-            // With a transition:
-            document.startViewTransition({
-                update: () => {
-                    currentSlide.classList.remove('active');
-                    nextSlide.classList.add('active');
-                },
-                types: ['forwards'],
-            }).then(() => updateButtonStates());
-        }
-    }
+    carouselContainer.addEventListener('scroll', () => {
+        updateButtonState(prevButton, nextButton);
+    });
 
-    // Attach click event listeners to previous buttons
-    slides.forEach(slide => {
-        const prevBtn = slide.querySelector('.carousel-btn.prev');
-        if (prevBtn) {
-            prevBtn.addEventListener('click', prevSlide);
+    prevButton.addEventListener('click', function() {
+        if (carouselContainer.scrollLeft > 0) {
+            carouselContainer.scrollBy({
+                left: -carouselContainer.offsetWidth,
+                behavior: 'smooth'
+            });
         }
     });
 
-    // Attach click event listeners to next buttons
-    slides.forEach(slide => {
-        const nextBtn = slide.querySelector('.carousel-btn.next');
-        if (nextBtn) {
-            nextBtn.addEventListener('click', nextSlide);
+    nextButton.addEventListener('click', function() {
+        if (carouselContainer.scrollLeft + carouselContainer.clientWidth < carouselContainer.scrollWidth) {
+            
+            carouselContainer.scrollBy({
+                left: carouselContainer.offsetWidth,
+                behavior: 'smooth'
+            });
         }
     });
-
-    // Initial update of button states for the first slide
-    updateButtonStates();
 });

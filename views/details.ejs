@@ -1,5 +1,5 @@
 <%- include('partials/header', {head:'', title: site.title}); -%>
-<script src="../scripts/script.js"></script>
+<script src="../scripts/script.js" defer></script>
 <script src="../scripts/bundle.js"></script>
 </head>
 <body>
@@ -15,7 +15,7 @@
         </div>
         <div class="carousel-container">
                 <% scans.forEach((scan, index) => { %>
-                    <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">
+                    <div class="carousel-item">
                         <section id="information">
                             <div>
                                 <h3><%- scan.title %></h3>
