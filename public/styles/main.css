@@ -114,25 +114,18 @@ section#information {
 
 section#sidebar { 
 	grid-area: 1 / 4 / 7 / 5;
-	/* width: 288px; */
 }
 
 section#score { 
 	grid-area: 1 / 1 / 4 / 4;
-	/* width: 865px;
-	height: 306px; */
 }
 
 section#foutmeldingen { 
 	grid-area: 4 / 1 / 7 / 4;
-	/* width: 865px;
-	height: 379px; */
 }
 
 section#toegankelijkheid { 
 	grid-area: 7 / 1 / 11 / 5;
-	/* width: 1173px;
-	height: 452px; */
 }
 
 div.screen-size{
@@ -149,6 +142,21 @@ section#score, section#foutmeldingen, section#toegankelijkheid, section#sidebar 
 	background-color: var(--secondary-bg-color);
 	padding: 20px;
 	width: 100%
+}
+
+.scan-content {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+  
+.scan-description {
+	flex: 1;
+}
+  
+.scan-result-chart {
+	width: 200px;
+	height: 200px;
 }
 
 section#sidebar {
@@ -176,7 +184,8 @@ section#sidebar > article {
 
 .scan-score {
 	font-size: var(--score-size);
-	font-weight:600;
+	font-weight: 600;
+	color: var(--text-color);
 }
 
 /* Table styles */

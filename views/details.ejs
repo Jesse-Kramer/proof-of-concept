@@ -1,6 +1,6 @@
 <%- include('partials/header', {head:'', title: site.title}); -%>
 <script src="../scripts/script.js" defer></script>
-<script src="../scripts/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 </head>
 <body>
     <main>
@@ -37,18 +37,21 @@
                         </section>
                         <div class="grid-container">
                             <section id="score">
-                                <div>
-                                    <h2><%= scan.title %></h2>
-                                    <p style="white-space: pre-wrap;"><%= scan.description %></p>
-                                    <table>
-                                        <tr>
-                                            <th><%= scan.title %></th>
-                                        </tr>
-                                        <tr>
-                                            <td><%= scan.score %></td>
-                                        </tr>
-                                    </table>
+                                <h2><%= scan.title %></h2>
+                                <div class="scan-content">
+                                    <div class="scan-description">
+                                      <p style="white-space: pre-wrap;"><%= scan.description %></p>
+                                    </div>
+                                    <div id="scan-result-chart-<%= index %>" class="scan-result-chart"></div>
                                 </div>
+                                <table id="scan-table-<%= index %>">
+                                    <tr>
+                                      <th><%= scan.title %></th>
+                                    </tr>
+                                    <tr>
+                                      <td><%= scan.score %></td>
+                                    </tr>
+                                </table>
                             </section>
                             <section id="foutmeldingen">
                                 <h2>Soorten foutmeldingen</h2>
@@ -146,5 +149,17 @@
                     </div>
                 <% }) %>
     </main>
+    <script>
+        // Pass the scan data from EJS to JavaScript
+        const scans = <%- JSON.stringify(scans) %>;
+    </script>
+    <script src="../scripts/score-chart.js" defer></script>
+    <noscript>
+        <style>
+        .scan-result-chart {
+            display: none;
+        }
+        </style>
+  </noscript>
 </body>
 </html>
