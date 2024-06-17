@@ -40,7 +40,14 @@
                                 <div>
                                     <h2><%= scan.title %></h2>
                                     <p style="white-space: pre-wrap;"><%= scan.description %></p>
-                                    <p><%= scan.score %></p>
+                                    <table>
+                                        <tr>
+                                            <th><%= scan.title %></th>
+                                        </tr>
+                                        <tr>
+                                            <td><%= scan.score %></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </section>
                             <section id="foutmeldingen">
@@ -77,52 +84,62 @@
                             </section>
                             <section id="sidebar">
                                 <article>
-                                    <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.5529 11.0878L33.4462 33.8086M11.5529 33.8086L33.4462 11.0878M42.2877 6.99945V36.9881C42.2877 39.7495 40.0492 41.9881 37.2877 41.9881H7.71135C4.94993 41.9881 2.71135 39.7495 2.71135 36.9881V6.99945C2.71135 4.23803 4.94992 1.99945 7.71135 1.99945H37.2877C40.0492 1.99945 42.2877 4.23802 42.2877 6.99945Z" stroke="#0275FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <p><%= scan.result[0].title %></p>
-                                    <p><%= scan.result[0].amount %></p>
+                                    <p><%= scan.result[0].title %></p>                                     
+                                    <div class="scan-results">
+                                        <p class="scan-score"><%= scan.result[0].amount %></p>
+                                        <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.5529 11.0878L33.4462 33.8086M11.5529 33.8086L33.4462 11.0878M42.2877 6.99945V36.9881C42.2877 39.7495 40.0492 41.9881 37.2877 41.9881H7.71135C4.94993 41.9881 2.71135 39.7495 2.71135 36.9881V6.99945C2.71135 4.23803 4.94992 1.99945 7.71135 1.99945H37.2877C40.0492 1.99945 42.2877 4.23802 42.2877 6.99945Z" stroke="#0275FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </article>
                                 <article>
-                                    <svg width="43" height="44" viewBox="0 0 43 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21.3868 41.8851C32.3155 41.8851 41.175 32.9334 41.175 21.8908C41.175 10.8482 32.3155 1.89648 21.3868 1.89648C10.4581 1.89648 1.59859 10.8482 1.59859 21.8908C1.59859 32.9334 10.4581 41.8851 21.3868 41.8851Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.5868 9.55362L5.99614 9.55362" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.5868 34.228L5.99614 34.228" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.5868 21.4666L1.59877 21.4666" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.5868 15.9366L2.79805 15.9366" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.5868 27.845L2.79805 27.845" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
                                     <p><%= scan.result[1].title %></p>
-                                    <p><%= scan.result[1].amount %></p>
+                                    <div class="scan-results">
+                                        <p class="scan-score"><%= scan.result[1].amount %></p>
+                                        <svg width="43" height="44" viewBox="0 0 43 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21.3868 41.8851C32.3155 41.8851 41.175 32.9334 41.175 21.8908C41.175 10.8482 32.3155 1.89648 21.3868 1.89648C10.4581 1.89648 1.59859 10.8482 1.59859 21.8908C1.59859 32.9334 10.4581 41.8851 21.3868 41.8851Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.5868 9.55362L5.99614 9.55362" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.5868 34.228L5.99614 34.228" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.5868 21.4666L1.59877 21.4666" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.5868 15.9366L2.79805 15.9366" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M21.5868 27.845L2.79805 27.845" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </article>
                                 <article>
-                                    <svg width="48" height="46" viewBox="0 0 48 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.90193 33.1532V26.2301C6.90193 25.312 7.26288 24.4316 7.90533 23.7824C8.54782 23.1333 9.41918 22.7686 10.3278 22.7686H37.7346C38.6431 22.7686 39.5147 23.1333 40.157 23.7824C40.7994 24.4316 41.1605 25.312 41.1605 26.2301V33.1532" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M24.0309 12.3852V33.1544" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M18.8919 5.46154V8.92308C18.8919 10.8348 20.4257 12.3846 22.3177 12.3846H25.7436C27.6356 12.3846 29.1694 10.8348 29.1694 8.92308V5.46154C29.1694 3.5498 27.6356 2 25.7436 2H22.3177C20.4257 2 18.8919 3.5498 18.8919 5.46154Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M18.8919 36.6153V40.0768C18.8919 41.9886 20.4257 43.5383 22.3177 43.5383H25.7436C27.6356 43.5383 29.1694 41.9886 29.1694 40.0768V36.6153C29.1694 34.7034 27.6356 33.1537 25.7436 33.1537H22.3177C20.4257 33.1537 18.8919 34.7034 18.8919 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M1.76289 36.6153V40.0768C1.76289 41.9886 3.2967 43.5383 5.18875 43.5383H8.6146C10.5066 43.5383 12.0405 41.9886 12.0405 40.0768V36.6153C12.0405 34.7034 10.5066 33.1537 8.6146 33.1537H5.18875C3.2967 33.1537 1.76289 34.7034 1.76289 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M36.0209 36.6153V40.0768C36.0209 41.9886 37.5546 43.5383 39.4467 43.5383H42.8726C44.7647 43.5383 46.2984 41.9886 46.2984 40.0768V36.6153C46.2984 34.7034 44.7647 33.1537 42.8726 33.1537H39.4467C37.5546 33.1537 36.0209 34.7034 36.0209 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
                                     <p><%= scan.result[2].title %></p>
-                                    <p><%= scan.result[2].amount %></p>
+                                    <div class="scan-results">
+                                        <p class="scan-score"><%= scan.result[2].amount %></p>
+                                        <svg width="48" height="46" viewBox="0 0 48 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.90193 33.1532V26.2301C6.90193 25.312 7.26288 24.4316 7.90533 23.7824C8.54782 23.1333 9.41918 22.7686 10.3278 22.7686H37.7346C38.6431 22.7686 39.5147 23.1333 40.157 23.7824C40.7994 24.4316 41.1605 25.312 41.1605 26.2301V33.1532" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M24.0309 12.3852V33.1544" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M18.8919 5.46154V8.92308C18.8919 10.8348 20.4257 12.3846 22.3177 12.3846H25.7436C27.6356 12.3846 29.1694 10.8348 29.1694 8.92308V5.46154C29.1694 3.5498 27.6356 2 25.7436 2H22.3177C20.4257 2 18.8919 3.5498 18.8919 5.46154Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M18.8919 36.6153V40.0768C18.8919 41.9886 20.4257 43.5383 22.3177 43.5383H25.7436C27.6356 43.5383 29.1694 41.9886 29.1694 40.0768V36.6153C29.1694 34.7034 27.6356 33.1537 25.7436 33.1537H22.3177C20.4257 33.1537 18.8919 34.7034 18.8919 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M1.76289 36.6153V40.0768C1.76289 41.9886 3.2967 43.5383 5.18875 43.5383H8.6146C10.5066 43.5383 12.0405 41.9886 12.0405 40.0768V36.6153C12.0405 34.7034 10.5066 33.1537 8.6146 33.1537H5.18875C3.2967 33.1537 1.76289 34.7034 1.76289 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M36.0209 36.6153V40.0768C36.0209 41.9886 37.5546 43.5383 39.4467 43.5383H42.8726C44.7647 43.5383 46.2984 41.9886 46.2984 40.0768V36.6153C46.2984 34.7034 44.7647 33.1537 42.8726 33.1537H39.4467C37.5546 33.1537 36.0209 34.7034 36.0209 36.6153Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
                                 </article>
                                 <article>
-                                    <svg width="43" height="44" viewBox="0 0 43 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.78659 41.9884H38.2741C39.9555 41.9884 41.3184 40.6113 41.3184 38.9124V5.07603C41.3184 3.37719 39.9555 2 38.2741 2H4.78659C3.10525 2 1.74226 3.37719 1.74226 5.07603V38.9124C1.74226 40.6113 3.10525 41.9884 4.78659 41.9884Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M5.54804 41.9885L27.7716 20.8252C28.0451 20.5951 28.3898 20.469 28.7458 20.469C29.1017 20.469 29.4464 20.5951 29.7199 20.8252L41.3188 29.2228" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13.9203 18.9189C16.4423 18.9189 18.4868 16.8532 18.4868 14.3049C18.4868 11.7566 16.4423 9.69083 13.9203 9.69083C11.3983 9.69083 9.35381 11.7566 9.35381 14.3049C9.35381 16.8532 11.3983 18.9189 13.9203 18.9189Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>                                        
-                                    <p><%= scan.result[3].title %></p>
-                                    <p><%= scan.result[3].amount %></p>
+                                    <p><%= scan.result[3].title %></p>                                     
+                                    <div class="scan-results">
+                                        <p class="scan-score"><%= scan.result[3].amount %></p>
+                                        <svg width="43" height="44" viewBox="0 0 43 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.78659 41.9884H38.2741C39.9555 41.9884 41.3184 40.6113 41.3184 38.9124V5.07603C41.3184 3.37719 39.9555 2 38.2741 2H4.78659C3.10525 2 1.74226 3.37719 1.74226 5.07603V38.9124C1.74226 40.6113 3.10525 41.9884 4.78659 41.9884Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M5.54804 41.9885L27.7716 20.8252C28.0451 20.5951 28.3898 20.469 28.7458 20.469C29.1017 20.469 29.4464 20.5951 29.7199 20.8252L41.3188 29.2228" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M13.9203 18.9189C16.4423 18.9189 18.4868 16.8532 18.4868 14.3049C18.4868 11.7566 16.4423 9.69083 13.9203 9.69083C11.3983 9.69083 9.35381 11.7566 9.35381 14.3049C9.35381 16.8532 11.3983 18.9189 13.9203 18.9189Z" stroke="#0275FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>   
+                                    </div>
                                 </article>
                                 <article>
-                                    <svg width="38" height="25" viewBox="0 0 38 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 5.5C2 3.85008 2 3.02513 2.55951 2.51256C3.11904 2 4.01957 2 5.82063 2H26.6996C27.7006 2 28.2011 2 28.6235 2.20708C29.0459 2.41414 29.3234 2.7956 29.8786 3.55855L34.9728 10.5586C35.6577 11.4995 36 11.9701 36 12.5C36 13.0299 35.6577 13.5005 34.9728 14.4414L29.8786 21.4414C29.3234 22.2044 29.0459 22.5858 28.6235 22.793C28.2011 23 27.7006 23 26.6996 23H5.82063C4.01957 23 3.11904 23 2.55951 22.4874C2 21.9748 2 21.1499 2 19.5V5.5Z" stroke="#0275FF" stroke-width="3"/>
-                                        <path d="M24.5 15C25.8807 15 27 13.8807 27 12.5C27 11.1193 25.8807 10 24.5 10C23.1193 10 22 11.1193 22 12.5C22 13.8807 23.1193 15 24.5 15Z" fill="#0275FF" stroke="#0275FF" stroke-width="3"/>
-                                    </svg>                                       
-                                    <p><%= scan.result[4].title %></p>
-                                    <p><%= scan.result[4].amount %></p>
+                                    <p><%= scan.result[4].title %></p>     
+                                    <div class="scan-results">
+                                        <p class="scan-score"><%= scan.result[4].amount %></p>
+                                        <svg width="38" height="25" viewBox="0 0 38 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 5.5C2 3.85008 2 3.02513 2.55951 2.51256C3.11904 2 4.01957 2 5.82063 2H26.6996C27.7006 2 28.2011 2 28.6235 2.20708C29.0459 2.41414 29.3234 2.7956 29.8786 3.55855L34.9728 10.5586C35.6577 11.4995 36 11.9701 36 12.5C36 13.0299 35.6577 13.5005 34.9728 14.4414L29.8786 21.4414C29.3234 22.2044 29.0459 22.5858 28.6235 22.793C28.2011 23 27.7006 23 26.6996 23H5.82063C4.01957 23 3.11904 23 2.55951 22.4874C2 21.9748 2 21.1499 2 19.5V5.5Z" stroke="#0275FF" stroke-width="3"/>
+                                            <path d="M24.5 15C25.8807 15 27 13.8807 27 12.5C27 11.1193 25.8807 10 24.5 10C23.1193 10 22 11.1193 22 12.5C22 13.8807 23.1193 15 24.5 15Z" fill="#0275FF" stroke="#0275FF" stroke-width="3"/>
+                                        </svg> 
+                                    </div>
                                 </article>
                             </section>
                         </div>

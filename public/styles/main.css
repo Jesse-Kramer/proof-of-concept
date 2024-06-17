@@ -100,7 +100,6 @@ div.carousel-item > .grid-container {
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(10, 1fr);
 	gap: 20px;
-	height: 100vh;
 	width: 100vw;
 	max-width: 1300px;
 }
@@ -165,8 +164,19 @@ section#sidebar {
 section#sidebar > article {
 	width: 100%;
 	padding: 20px;
-	height: auto;
+	height: 125px;
 	border-radius: 15px;
+}
+
+.scan-results {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scan-score {
+	font-size: var(--score-size);
+	font-weight:600;
 }
 
 /* Table styles */
@@ -240,7 +250,7 @@ h2 {
 }
 @supports selector(view-transition-name) {
 	.carousel-container.cando-vt {
-		overflow: none;
+		overflow: hidden;
 	}
 
 	.carousel-container.cando-vt .carousel-item {
