@@ -238,6 +238,19 @@ h2 {
 ::view-transition-group(*) {
 	animation-duration: .75;
 }
+@supports selector(view-transition-name) {
+	.carousel-container.cando-vt {
+		overflow: none;
+	}
+
+	.carousel-container.cando-vt .carousel-item {
+		display: none;
+	}
+
+	.carousel-container.cando-vt .carousel-item.active {
+		display: block;
+	}
+}
 
 html:active-view-transition-type(forwards) {
 	&::view-transition-old(content) {

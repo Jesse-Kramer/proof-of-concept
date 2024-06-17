@@ -15,7 +15,7 @@
         </div>
         <div class="carousel-container">
                 <% scans.forEach((scan, index) => { %>
-                    <div class="carousel-item">
+                    <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">
                         <section id="information">
                             <div>
                                 <h3><%- scan.title %></h3>
