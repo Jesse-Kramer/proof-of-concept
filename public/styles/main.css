@@ -144,9 +144,11 @@ section#score, section#foutmeldingen, section#toegankelijkheid, section#sidebar 
 	width: 100%
 }
 
+/* Scan charts */
+
 .scan-content {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
 }
   
@@ -154,10 +156,35 @@ section#score, section#foutmeldingen, section#toegankelijkheid, section#sidebar 
 	flex: 1;
 }
   
-.scan-result-chart {
+.scan-score-text {
+	font-size: 2em;
+	font-weight: bold;
+	color: #5D666A;
+	margin-top: 10px;
+}
+  
+.scan-result-chart,
+.error-chart {
 	width: 200px;
 	height: 200px;
 }
+  
+#error-types table, #foutmeldingen table {
+	width: 100%;
+	border-collapse: collapse;
+}
+  
+#error-types th, #error-types td, #foutmeldingen th, #foutmeldingen td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+}
+  
+#error-types th, #foutmeldingen th {
+	background-color: #f9f9f9;
+}
+
+/* End of scans */
 
 section#sidebar {
     display: flex;
@@ -208,11 +235,6 @@ th {
 .currentScan {
 	background-color: #e0f7fa;
 	font-weight: bold;
-}
-
-/* Section styles */
-h2 {
-	margin-bottom: 20px;
 }
 
 /* Media queries */

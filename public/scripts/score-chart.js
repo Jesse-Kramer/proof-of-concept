@@ -1,10 +1,21 @@
-const width = 200;
-const height = 200;
-const margin = 20;
-const radius = Math.min(width, height) / 2 - margin;
+let width = 200;
+let height = 200;
+let margin = 20;
+let radius = Math.min(width, height) / 2 - margin;
+
+const icons = {
+  "Contrast fouten": "/images/contrast-icon.svg",
+  "Structurele fouten": "/images/structureel-icon.svg",
+  "Ontbrekende alt-teksten": "/images/alt-teksten-icon.svg",
+  "Ontbrekende aria-labels": "/images/aria-labels-icon.svg"
+};
 
 scans.forEach((scan, index) => {
   const scanResultData = scan.score;
+  let errorData = scan.result;
+
+  // Filter out "Ontdekte fouten"
+  errorData = errorData.filter(d => d.title !== "Ontdekte fouten");
 
   try {
     const color = scanResultData === 100 ? "#0275FF" : "#FF9800";
@@ -52,5 +63,79 @@ scans.forEach((scan, index) => {
     // If there is an error, ensure the table is visible
     document.getElementById(`scan-table-${index}`).style.display = "block";
     document.getElementById(`scan-result-chart-${index}`).style.display = "none";
+  }
+
+  // Create the error types chart
+  try {
+    let width = 800;
+    let height = 300;
+    let margin = 40;
+
+    const errorSvg = d3.select(`#error-chart-${index}`)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", `translate(${margin}, ${margin})`);
+    
+    const x = d3.scaleBand()
+      .range([0, width - 2 * margin])
+      .domain(errorData.map(d => d.title))
+      .padding(0.4);
+    
+    const y = d3.scaleLinear()
+      .range([height - 2 * margin, 0])
+      .domain([0, 50]);  // Set Y-axis range from 0 to 50
+    
+    errorSvg.append("g")
+      .attr("transform", `translate(0, ${height - 2 * margin})`)
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "translate(0,5)") // Adjusted transform
+      .style("text-anchor", "middle");
+    
+    errorSvg.append("g")
+      .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format("d"))); // Steps of 10
+
+    errorSvg.selectAll("circle")
+      .data(errorData)
+      .enter()
+      .append("circle")
+      .attr("cx", d => x(d.title) + x.bandwidth() / 2)
+      .attr("cy", d => y(d.amount))
+      .attr("r", 5)
+      .style("fill", "#0275FF");
+
+    // Add icons
+    errorSvg.selectAll(".icon")
+      .data(errorData)
+      .enter()
+      .append("image")
+      .attr("xlink:href", d => icons[d.title])
+      .attr("width", 24)
+      .attr("height", 24)
+      .attr("x", d => x(d.title) + x.bandwidth() / 2 - 12)
+      .attr("y", d => y(d.amount) - 30);
+
+    // Add dashed lines
+    errorSvg.selectAll(".line")
+      .data(errorData)
+      .enter()
+      .append("line")
+      .attr("x1", d => x(d.title) + x.bandwidth() / 2)
+      .attr("y1", d => y(d.amount))
+      .attr("x2", d => x(d.title) + x.bandwidth() / 2)
+      .attr("y2", height - 2 * margin)
+      .style("stroke", "#0275FF")
+      .style("stroke-width", 2)
+      .style("stroke-dasharray", "5,5");
+
+    // Remove duplicate labels
+    // This section is not needed as d3.axisBottom already adds labels
+
+    document.getElementById(`error-table-${index}`).style.display = 'none';
+  }
+  catch (error) {
+    console.error('Error creating chart:', error);
   }
 });
