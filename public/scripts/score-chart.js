@@ -130,12 +130,76 @@ scans.forEach((scan, index) => {
       .style("stroke-width", 2)
       .style("stroke-dasharray", "5,5");
 
-    // Remove duplicate labels
-    // This section is not needed as d3.axisBottom already adds labels
-
     document.getElementById(`error-table-${index}`).style.display = 'none';
   }
   catch (error) {
     console.error('Error creating chart:', error);
   }
+
+  // Create the toegankelijkheids chart
+  try {
+    let width = 1100;
+    let height = 400;
+    let margin = 40;
+
+    const toegankelijkheidsSvg = d3.select(`#toegankelijkheids-chart-${index}`)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", `translate(${margin}, ${margin})`);
+    
+    const x = d3.scaleBand()
+      .domain(scans.map(d => d.date))
+      .range([0, width - 2 * margin])
+      .padding(0.1);
+    
+    const y = d3.scaleLinear()
+      .domain([0, 100])
+      .range([height - 2 * margin, 0]);
+    
+    toegankelijkheidsSvg.append('g')
+      .attr("transform", `translate(0, ${height - 2 * margin})`)
+      .call(d3.axisBottom(x));
+
+    toegankelijkheidsSvg.append('g')
+      .call(d3.axisLeft(y).ticks(10).tickFormat(d => d + '%'));
+
+    const line = d3.line()
+      .x(d => x(d.date) + x.bandwidth() / 2)
+      .y(d => y(d.score))
+      .curve(d3.curveMonotoneX);
+
+    toegankelijkheidsSvg.append('path')
+      .datum(scans)
+      .attr('fill', 'none')
+      .attr('stroke', '#0275FF')
+      .attr('stroke-width', 2)
+      .attr('d', line);
+
+    toegankelijkheidsSvg.selectAll('circle')
+      .data(scans)
+      .enter()
+      .append('circle')
+      .attr('cx', d => x(d.date) + x.bandwidth() / 2)
+      .attr('cy', d => y(d.score))
+      .attr('r', 5)
+      .attr('fill', '#0275FF');
+
+    toegankelijkheidsSvg.selectAll('text.label')
+      .data(scans)
+      .enter()
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', d => x(d.date) + x.bandwidth() / 2)
+      .attr('y', d => y(d.score) - 10)
+      .attr('text-anchor', 'middle')
+      .text(d => d.score + '%');
+
+    document.getElementById(`toegankelijkheids-table-${index}`).style.display = 'none';
+  }
+  catch (error) {
+    console.error('Error creating chart:', error);
+  }
+
 });

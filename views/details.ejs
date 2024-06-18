@@ -71,7 +71,8 @@
                             </section>
                             <section id="toegankelijkheid">
                                 <h2>Toegankelijkheid</h2>
-                                <table>
+                                <div id="toegankelijkheids-chart-<%= index %>" class="toegankelijkheids-chart"></div>
+                                <table id="toegankelijkheids-table-<%= index %>">
                                     <tr>
                                         <% scans.forEach(item => { %>
                                             <th><%= item.date %></th>
@@ -81,7 +82,6 @@
                                         <% scans.forEach(item => { %>
                                             <td class="<%= item.date === scan.date ? 'currentScan' : '' %>"><%= item.score %></td>
                                         <% }); %>
-                                        <td></td>
                                     </tr>
                                 </table>
                             </section>
@@ -143,7 +143,7 @@
     <script src="../scripts/score-chart.js" defer></script>
     <noscript>
         <style>
-        .scan-result-chart, .error-chart {
+        .scan-result-chart, .error-chart, .toegankelijkheids-chart {
             display: none;
         }
         </style>

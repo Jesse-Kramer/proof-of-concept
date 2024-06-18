@@ -164,24 +164,9 @@ section#score, section#foutmeldingen, section#toegankelijkheid, section#sidebar 
 }
   
 .scan-result-chart,
-.error-chart {
-	width: 200px;
-	height: 200px;
-}
-  
-#error-types table, #foutmeldingen table {
-	width: 100%;
-	border-collapse: collapse;
-}
-  
-#error-types th, #error-types td, #foutmeldingen th, #foutmeldingen td {
-	border: 1px solid #ccc;
-	padding: 8px;
-	text-align: center;
-}
-  
-#error-types th, #foutmeldingen th {
-	background-color: #f9f9f9;
+.error-chart,
+.toegankelijkheids-chart {
+	overflow: hidden;
 }
 
 /* End of scans */
