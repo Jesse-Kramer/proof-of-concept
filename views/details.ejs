@@ -4,15 +4,6 @@
 </head>
 <body>
     <main>
-        <div class="screen-size">
-            <svg width="134" height="98" viewBox="0 0 134 98" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1.5" y="1.5" width="131" height="95" rx="3.5" stroke="#0275FF" stroke-width="3"/>
-                <path d="M48.5 74C48.5 74.8284 49.1716 75.5 50 75.5H63.5C64.3284 75.5 65 74.8284 65 74C65 73.1716 64.3284 72.5 63.5 72.5H51.5V60.5C51.5 59.6716 50.8284 59 50 59C49.1716 59 48.5 59.6716 48.5 60.5V74ZM85.5 40C85.5 39.1716 84.8284 38.5 84 38.5H70.5C69.6716 38.5 69 39.1716 69 40C69 40.8284 69.6716 41.5 70.5 41.5H82.5V53.5C82.5 54.3284 83.1716 55 84 55C84.8284 55 85.5 54.3284 85.5 53.5V40ZM51.0607 75.0607L85.0607 41.0607L82.9393 38.9393L48.9393 72.9393L51.0607 75.0607Z" fill="#0275FF"/>
-                <path d="M2.5 17.5H131.5" stroke="#0275FF" stroke-width="3"/>
-            </svg>
-            <h3>Je scherm is te klein</h3>
-            <p>AccessDash vereist een minimale schermbreedte van 900px</p>      
-        </div>
         <div class="carousel-container">
                 <% scans.forEach((scan, index) => { %>
                     <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">

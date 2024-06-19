@@ -89,8 +89,8 @@ body{
 	height: auto;
 }
 
-.carousel-btn:disabled {
-	background-color: var(--main-bg-color);
+.carousel-btn:disabled svg path{
+	stroke: var(--main-bg-color);
 }
 
 /* Section/Grid styling */
@@ -222,42 +222,86 @@ th {
 	font-weight: bold;
 }
 
+@media screen and (max-width: 1300px) {
+	.grid-container,
+	section#information {
+		padding: 0 20px 0 20px;
+	}
+}
+
 /* Media queries */
-@media screen and (max-width: 1050px) {
-}
-
-@media screen and (max-width: 900px) {
-	main div.container,
-	main div.container:focus-visible{
-		display: none;
-		visibility: hidden;
+@media screen and (max-width: 1080px) {
+	:root {
+		/* Sizes */
+		--title-size: 31px;
+		--small-title-size: 23px;
+		--score-size: 35px;
+		--text-size: 15px;
+		--small-text-size: 13px;
 	}
 
-	main div.screen-size{
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
-        align-items: center;
-		color: var(--text-color);
-		background-color: var(--secondary-bg-color);
-		height: 100vh;
-		width: 100vw;
+	div.carousel-item > .grid-container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: max-content;
+	}
+	
+	section#score { 
+		grid-area: 1 / 1 / 2 / 4;
+	}
+
+	section#sidebar { 
+		grid-area: 2 / 1 / 3 / 4;
+		overflow: scroll;
+		justify-content: space-between;
+	}
+
+	section#sidebar > article {
+		max-width: 230px;
+	}
+	
+	section#foutmeldingen { 
+		grid-area: 3 / 1 / 4 / 4;
+	}
+	
+	section#toegankelijkheid { 
+		grid-area: 4 / 1 / 5 / 4;
+	}
+
+	.toegankelijkheids-chart, .error-chart {
+		overflow: scroll;
+	}
+
+	.scan-results{
 		gap: 20px;
+	}
 
-		h3{
-			font-size: 24px;
-			font-weight: bold;
-		}
-		p{
-			font-size: 15px;
-			text-align: center;
-		}
+	article picture img {
+		width: 75%;
 	}
 }
+@media screen and (max-width: 530px) {
+	section#information {
+		flex-direction: column;
+		gap: 20px;
+	}
 
-@media (min-width: 1200px) {}
+	section#sidebar > article {
+		width: 175px;
+	}
 
-@media (min-width: 1560px) {}
+}
+
+@media screen and (max-width: 420px) {
+	section#sidebar > article {
+		width: 150px;
+	}
+
+	.scan-result-chart {
+		overflow: visible;
+	}
+
+}
 
 /* View transitions */
 
