@@ -46,7 +46,9 @@ function changeDate(data) {
         const getMonth = months[getDate.getMonth()];
         const getYear = getDate.getFullYear();
         const updatedDate = getMonth + " " + getYear;
+        const updatedMonth = getMonth;
         scan.date = updatedDate;
+        scan.dateMonth = updatedMonth;
     });
     return data;
 }

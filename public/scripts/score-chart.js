@@ -293,7 +293,7 @@ scans.forEach((scan, index) => {
             .attr("text-anchor", "middle")
             .attr("font-size", "12px")
             .attr("fill", "#0275FF")
-            .text(new Date(d.date).toLocaleString('default', { month: 'long' }));
+            .text(scan.dateMonth);
   
           // Add the score text
           popup.append("text")
