@@ -21,7 +21,7 @@ scans.forEach((scan, index) => {
 
   try {
     const color = scanResultData === 100 ? "#0275FF" : "#FF9800"; // Color based on score
-
+  
     // Create the SVG container for the pie chart
     const svg = d3.select(`#scan-result-chart-${index}`)
       .append("svg")
@@ -29,41 +29,57 @@ scans.forEach((scan, index) => {
       .attr("height", height)
       .append("g")
       .attr("transform", `translate(${width / 2},${height / 2})`);
-
+  
     // Prepare the pie layout
     const pie = d3.pie()
       .sort(null)
       .value(d => d.value);
-
+  
     // Define the data for the pie chart
     const data = [
       { name: "score", value: scanResultData },
       { name: "remaining", value: 100 - scanResultData }
     ];
-
+  
     // Define the arc for the pie slices
     const arc = d3.arc()
       .innerRadius(radius * 0.7)
       .outerRadius(d => d.data.name === "score" ? radius + 0.7 : radius); // Slightly larger outer radius for the score arc
-
-    // Create the pie slices
-    svg.selectAll('path')
+  
+    // Create the pie slices with animation
+    const path = svg.selectAll('path')
       .data(pie(data))
       .enter()
       .append('path')
-      .attr('d', arc)
       .attr('fill', d => d.data.name === "score" ? color : "#FFE0B3")
-      .attr("stroke", d => d.data.name === "score" ? color : "#FFE0B3")
-      .attr("stroke-width", "2px");
-
-    // Add the score text in the center of the pie chart
+      .attr('stroke', d => d.data.name === "score" ? color : "#FFE0B3")
+      .attr('stroke-width', '2px')
+      .each(function(d) { this._current = d; }) // Store the initial angles
+      .transition()
+      .duration(2000)
+      .attrTween('d', function(d) {
+        const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
+        return function(t) {
+          return arc(interpolate(t));
+        };
+      });
+  
+    // Add the score text in the center of the pie chart with animation
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr("dy", "0.35em")
       .attr("class", "scan-score")
       .attr("fill", "#5D666A")
-      .text(`${scanResultData}%`);
-
+      .transition()
+      .delay(1000) // Delay before text appears
+      .duration(1000)
+      .tween("text", function() {
+        const i = d3.interpolate(0, scanResultData);
+        return function(t) {
+          this.textContent = Math.round(i(t)) + "%";
+        };
+      });
+  
     // Hide the table if the chart is shown
     document.getElementById(`scan-table-${index}`).style.display = "none";
   } catch (error) {
@@ -73,12 +89,11 @@ scans.forEach((scan, index) => {
     document.getElementById(`scan-result-chart-${index}`).style.display = "none";
   }
 
-  // Create the error types chart
   try {
     let width = 800;
     let height = 300;
     let margin = 40;
-
+  
     // Create the SVG container for the error chart
     const errorSvg = d3.select(`#error-chart-${index}`)
       .append("svg")
@@ -109,18 +124,22 @@ scans.forEach((scan, index) => {
     // Add the Y-axis to the SVG
     errorSvg.append("g")
       .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format("d"))); // Steps of 10
-
-    // Create circles for each error data point
+  
+    // Create circles for each error data point with animation
     errorSvg.selectAll("circle")
       .data(errorData)
       .enter()
       .append("circle")
       .attr("cx", d => x(d.title) + x.bandwidth() / 2)
+      .attr("cy", height - 2 * margin) // Start at the bottom
+      .attr("r", 0) // Start with radius 0
+      .style("fill", "#0275FF")
+      .transition()
+      .duration(2000)
       .attr("cy", d => y(d.amount))
-      .attr("r", 5)
-      .style("fill", "#0275FF");
-
-    // Add icons for each error data point
+      .attr("r", 5);
+  
+    // Add icons for each error data point with animation
     errorSvg.selectAll(".icon")
       .data(errorData)
       .enter()
@@ -129,21 +148,27 @@ scans.forEach((scan, index) => {
       .attr("width", 24)
       .attr("height", 24)
       .attr("x", d => x(d.title) + x.bandwidth() / 2 - 12)
+      .attr("y", height - 2 * margin) // Start at the bottom
+      .transition()
+      .duration(2000)
       .attr("y", d => y(d.amount) - 30);
-
-    // Add dashed lines from each circle to the X-axis
+  
+    // Add dashed lines from each circle to the X-axis with animation
     errorSvg.selectAll(".line")
       .data(errorData)
       .enter()
       .append("line")
       .attr("x1", d => x(d.title) + x.bandwidth() / 2)
-      .attr("y1", d => y(d.amount))
+      .attr("y1", d => height - 2 * margin) // Start at the bottom
       .attr("x2", d => x(d.title) + x.bandwidth() / 2)
       .attr("y2", height - 2 * margin)
       .style("stroke", "#0275FF")
       .style("stroke-width", 2)
-      .style("stroke-dasharray", "5,5");
-
+      .style("stroke-dasharray", "5,5")
+      .transition()
+      .duration(2000)
+      .attr("y1", d => y(d.amount));
+  
     document.getElementById(`error-table-${index}`).style.display = 'none';
   } catch (error) {
     console.error('Error creating chart:', error);
@@ -189,23 +214,52 @@ scans.forEach((scan, index) => {
       .y(d => y(d.score))
       .curve(d3.curveMonotoneX);
   
-    // Create the trend line
-    toegankelijkheidsSvg.append('path')
+    // Create the trend line with animation
+    const path = toegankelijkheidsSvg.append('path')
       .datum(scans)
       .attr('fill', 'none')
       .attr('stroke', '#0275FF')
       .attr('stroke-width', 2)
       .attr('d', line);
   
-    // Add circles at each data point
+    const totalLength = path.node().getTotalLength();
+  
+    path
+      .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+      .duration(2000)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0);
+  
+    // Add circles at each data point with animation
     toegankelijkheidsSvg.selectAll('circle')
       .data(scans)
       .enter()
       .append('circle')
       .attr('cx', d => x(d.date) + x.bandwidth() / 2)
-      .attr('cy', d => y(d.score))
+      .attr('cy', y(0)) // Start from y(0)
       .attr('r', 5)
       .attr('fill', '#0275FF')
+      .transition()
+      .duration(2000)
+      .attr('cy', d => y(d.score));
+  
+    // Add text labels for each data point with animation
+    toegankelijkheidsSvg.selectAll('text.label')
+      .data(scans)
+      .enter()
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', d => x(d.date) + x.bandwidth() / 2)
+      .attr('y', y(0)) // Start from y(0)
+      .attr('text-anchor', 'middle')
+      .transition()
+      .duration(2000)
+      .attr('y', d => y(d.score) - 10)
+      .text(d => d.score + '%');
+  
+    toegankelijkheidsSvg.selectAll('circle')
       .each(function (d) {
         if (d.date === scan.date) { // Change to your specific date
           // Add a dashed vertical line
