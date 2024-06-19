@@ -154,7 +154,7 @@ scans.forEach((scan, index) => {
     let width = 1100;
     let height = 400;
     let margin = 40;
-
+  
     // Create the SVG container for the toegankelijkheids chart
     const toegankelijkheidsSvg = d3.select(`#toegankelijkheids-chart-${index}`)
       .append("svg")
@@ -178,17 +178,17 @@ scans.forEach((scan, index) => {
     toegankelijkheidsSvg.append('g')
       .attr("transform", `translate(0, ${height - 2 * margin})`)
       .call(d3.axisBottom(x));
-
+  
     // Add the Y-axis to the SVG
     toegankelijkheidsSvg.append('g')
       .call(d3.axisLeft(y).ticks(10).tickFormat(d => d + '%'));
-
+  
     // Define the line generator for the score trend line
     const line = d3.line()
       .x(d => x(d.date) + x.bandwidth() / 2)
       .y(d => y(d.score))
       .curve(d3.curveMonotoneX);
-
+  
     // Create the trend line
     toegankelijkheidsSvg.append('path')
       .datum(scans)
@@ -196,7 +196,7 @@ scans.forEach((scan, index) => {
       .attr('stroke', '#0275FF')
       .attr('stroke-width', 2)
       .attr('d', line);
-
+  
     // Add circles at each data point
     toegankelijkheidsSvg.selectAll('circle')
       .data(scans)
@@ -205,7 +205,53 @@ scans.forEach((scan, index) => {
       .attr('cx', d => x(d.date) + x.bandwidth() / 2)
       .attr('cy', d => y(d.score))
       .attr('r', 5)
-      .attr('fill', '#0275FF');
+      .attr('fill', '#0275FF')
+      .each(function (d) {
+        if (d.date === scan.date) { // Change to your specific date
+          // Add a dashed vertical line
+          toegankelijkheidsSvg.append("line")
+            .attr("x1", x(d.date) + x.bandwidth() / 2)
+            .attr("y1", y(d.score))
+            .attr("x2", x(d.date) + x.bandwidth() / 2)
+            .attr("y2", height - 2 * margin)
+            .attr("stroke", "#0275FF")
+            .attr("stroke-dasharray", "5,5");
+  
+          // Add popup group
+          const popup = toegankelijkheidsSvg.append("g")
+            .attr("transform", `translate(${x(d.date) + x.bandwidth() / 2},${y(d.score) - 40})`);
+  
+          // Add background rectangle with rounded corners
+          popup.append("rect")
+            .attr("x", -40)
+            .attr("y", -30)
+            .attr("width", 80)
+            .attr("height", 40)
+            .attr("fill", "rgba(2, 117, 255, 0.1)")
+            .attr("stroke", "rgba(2, 117, 255, 0.5)")
+            .attr("rx", 5)
+            .attr("ry", 5);
+  
+          // Add the date text
+          popup.append("text")
+            .attr("x", 0)
+            .attr("y", -15)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "#0275FF")
+            .text(new Date(d.date).toLocaleString('default', { month: 'long' }));
+  
+          // Add the score text
+          popup.append("text")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "14px")
+            .attr("font-weight", "bold")
+            .attr("fill", "#0275FF")
+            .text(`${d.score}%`);
+        }
+      });
 
     // Add text labels for each data point
     toegankelijkheidsSvg.selectAll('text.label')
