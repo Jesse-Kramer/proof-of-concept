@@ -7,7 +7,7 @@
         <div class="carousel-container">
             <% scans.forEach((scan, index) => { %>
                 <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">
-                    <section id="information">
+                    <section class="information">
                         <div>
                             <h4><%- scan.title %></h4>
                             <h2><%- site.title %>/home</h2>
@@ -18,7 +18,7 @@
                                 <path d="M5 2L2.44163 4.46362C1.6456 5.23016 1.62213 6.49702 2.38922 7.29253L5 10" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
                                 </svg>
                             </button>
-                            <date class="carousel-btn"><%= scan.date %></date>
+                            <p class="carousel-btn"><%= scan.date %></p>
                             <button class="carousel-btn next" aria-label="Next scan">
                                 <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 10L4.55837 7.53638C5.3544 6.76984 5.37787 5.50298 4.61078 4.70747L2 2" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
@@ -27,7 +27,7 @@
                         </div>
                     </section>
                     <div class="grid-container">
-                        <section id="score">
+                        <section class="score">
                             <h1><%= scan.title %></h1>
                             <div class="scan-content">
                                 <div class="scan-description">
@@ -44,7 +44,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section id="foutmeldingen">
+                        <section class="foutmeldingen">
                             <h3>Soorten foutmeldingen</h3>
                             <div id="error-chart-<%= index %>" class="error-chart"></div>
                             <table id="error-table-<%= index %>">
@@ -60,7 +60,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section id="toegankelijkheid">
+                        <section class="toegankelijkheid">
                             <h3>Toegankelijkheid</h3>
                             <div id="toegankelijkheids-chart-<%= index %>" class="toegankelijkheids-chart"></div>
                             <table id="toegankelijkheids-table-<%= index %>">
@@ -76,7 +76,7 @@
                                 </tr>
                             </table>
                         </section>
-                        <section id="sidebar">
+                        <section class="sidebar">
                             <article>
                                 <h5><%= scan.result[0].title %></h5>                                     
                                 <div class="scan-results">
