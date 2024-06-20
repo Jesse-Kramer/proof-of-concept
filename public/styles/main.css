@@ -43,6 +43,29 @@ body{
 	font-family: var(--content-text);
 }
 
+/* Fonts */
+h1{
+	font-size: var(--title-size);
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+h2 {
+	font-size: 32px;
+	font-weight: bold;
+}
+h3 {
+	font-size: var(--small-title-size);
+	font-weight: 500;
+}
+h4{
+	font-size: 18px;
+	font-weight: 500;
+}
+h5, p{
+	font-size: var(--text-size);
+	font-weight: 500;
+}
+
 /* Carousel styling */
 .carousel-container {
     display: flex;
@@ -148,12 +171,13 @@ section#score, section#foutmeldingen, section#toegankelijkheid, section#sidebar 
 
 .scan-content {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 }
   
 .scan-description {
 	flex: 1;
+	max-width: 480px;
 }
   
 .scan-score-text {
@@ -222,13 +246,6 @@ th {
 	font-weight: bold;
 }
 
-@media screen and (max-width: 1300px) {
-	.grid-container,
-	section#information {
-		padding: 0 20px 0 20px;
-	}
-}
-
 /* Media queries */
 @media screen and (max-width: 1080px) {
 	:root {
@@ -280,6 +297,14 @@ th {
 		width: 75%;
 	}
 }
+
+@media screen and (max-width: 1300px) {
+	.grid-container,
+	section#information {
+		padding: 0 20px 0 20px;
+	}
+}
+
 @media screen and (max-width: 530px) {
 	section#information {
 		flex-direction: column;
@@ -289,7 +314,6 @@ th {
 	section#sidebar > article {
 		width: 175px;
 	}
-
 }
 
 @media screen and (max-width: 420px) {
@@ -300,7 +324,6 @@ th {
 	.scan-result-chart {
 		overflow: visible;
 	}
-
 }
 
 /* View transitions */
@@ -308,6 +331,7 @@ th {
 ::view-transition-group(*) {
 	animation-duration: .75;
 }
+
 @supports selector(view-transition-name) {
 	.carousel-container.cando-vt {
 		overflow: hidden;

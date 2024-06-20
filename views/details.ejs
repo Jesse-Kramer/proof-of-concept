@@ -5,127 +5,128 @@
 <body>
     <main>
         <div class="carousel-container">
-                <% scans.forEach((scan, index) => { %>
-                    <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">
-                        <section id="information">
-                            <div>
-                                <h3><%- scan.title %></h3>
-                                <h1><%- site.title %></h1>
-                            </div>
-                            <div class="carousel-buttons">
-                                <button class="carousel-btn prev" aria-label="Previous scan">
-                                    <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 2L2.44163 4.46362C1.6456 5.23016 1.62213 6.49702 2.38922 7.29253L5 10" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <date class="carousel-btn"><%= scan.date %></date>
-                                <button class="carousel-btn next" aria-label="Next scan">
-                                    <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2 10L4.55837 7.53638C5.3544 6.76984 5.37787 5.50298 4.61078 4.70747L2 2" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </section>
-                        <div class="grid-container">
-                            <section id="score">
-                                <h2><%= scan.title %></h2>
-                                <div class="scan-content">
-                                    <div class="scan-description">
-                                      <p style="white-space: pre-wrap;"><%= scan.description %></p>
-                                    </div>
-                                    <div id="scan-result-chart-<%= index %>" class="scan-result-chart"></div>
-                                </div>
-                                <table id="scan-table-<%= index %>">
-                                    <tr>
-                                      <th><%= scan.title %></th>
-                                    </tr>
-                                    <tr>
-                                      <td><%= scan.score %></td>
-                                    </tr>
-                                </table>
-                            </section>
-                            <section id="foutmeldingen">
-                                <h2>Soorten foutmeldingen</h2>
-                                <div id="error-chart-<%= index %>" class="error-chart"></div>
-                                <table id="error-table-<%= index %>">
-                                  <tr>
-                                    <% scan.result.forEach(item => { %>
-                                      <th><%= item.title %></th>
-                                    <% }); %>
-                                  </tr>
-                                  <tr>
-                                    <% scan.result.forEach(item => { %>
-                                      <td><%= item.amount %></td>
-                                    <% }); %>
-                                  </tr>
-                                </table>
-                            </section>
-                            <section id="toegankelijkheid">
-                                <h2>Toegankelijkheid</h2>
-                                <div id="toegankelijkheids-chart-<%= index %>" class="toegankelijkheids-chart"></div>
-                                <table id="toegankelijkheids-table-<%= index %>">
-                                    <tr>
-                                        <% scans.forEach(item => { %>
-                                            <th><%= item.date %></th>
-                                        <% }); %>
-                                    </tr>
-                                    <tr>
-                                        <% scans.forEach(item => { %>
-                                            <td class="<%= item.date === scan.date ? 'currentScan' : '' %>"><%= item.score %></td>
-                                        <% }); %>
-                                    </tr>
-                                </table>
-                            </section>
-                            <section id="sidebar">
-                                <article>
-                                    <p><%= scan.result[0].title %></p>                                     
-                                    <div class="scan-results">
-                                        <p class="scan-score"><%= scan.result[0].amount %></p>
-                                        <picture>
-                                            <img src="../images/total-icon.svg" alt="Totale fouten icon">
-                                        </picture>
-                                    </div>
-                                </article>
-                                <article>
-                                    <p><%= scan.result[1].title %></p>
-                                    <div class="scan-results">
-                                        <p class="scan-score"><%= scan.result[1].amount %></p>
-                                        <picture>
-                                            <img src="../images/contrast-icon.svg" alt="Contrast icon">
-                                        </picture>
-                                    </div>
-                                </article>
-                                <article>
-                                    <p><%= scan.result[2].title %></p>
-                                    <div class="scan-results">
-                                        <p class="scan-score"><%= scan.result[2].amount %></p>
-                                        <picture>
-                                            <img src="../images/structureel-icon.svg" alt="Structureel icon">
-                                        </picture>
-                                    </div>
-                                </article>
-                                <article>
-                                    <p><%= scan.result[3].title %></p>                                     
-                                    <div class="scan-results">
-                                        <p class="scan-score"><%= scan.result[3].amount %></p>
-                                        <picture>
-                                            <img src="../images/alt-teksten-icon.svg" alt="Alt teksten icon">
-                                        </picture>
-                                    </div>
-                                </article>
-                                <article>
-                                    <p><%= scan.result[4].title %></p>     
-                                    <div class="scan-results">
-                                        <p class="scan-score"><%= scan.result[4].amount %></p>
-                                        <picture>
-                                            <img src="../images/aria-labels-icon.svg" alt="Aria labels icon">
-                                        </picture>
-                                    </div>
-                                </article>
-                            </section>
+            <% scans.forEach((scan, index) => { %>
+                <div class="carousel-item <% if (index === scans.length - 1) { %>active<% } %>">
+                    <section id="information">
+                        <div>
+                            <h4><%- scan.title %></h4>
+                            <h2><%- site.title %>/home</h2>
                         </div>
+                        <div class="carousel-buttons">
+                            <button class="carousel-btn prev" aria-label="Previous scan">
+                                <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 2L2.44163 4.46362C1.6456 5.23016 1.62213 6.49702 2.38922 7.29253L5 10" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <date class="carousel-btn"><%= scan.date %></date>
+                            <button class="carousel-btn next" aria-label="Next scan">
+                                <svg viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 10L4.55837 7.53638C5.3544 6.76984 5.37787 5.50298 4.61078 4.70747L2 2" stroke="#5D666A" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </section>
+                    <div class="grid-container">
+                        <section id="score">
+                            <h1><%= scan.title %></h1>
+                            <div class="scan-content">
+                                <div class="scan-description">
+                                    <p style="white-space: pre-wrap;"><%= scan.description %></p>
+                                </div>
+                                <div id="scan-result-chart-<%= index %>" class="scan-result-chart"></div>
+                            </div>
+                            <table id="scan-table-<%= index %>">
+                                <tr>
+                                    <th><%= scan.title %></th>
+                                </tr>
+                                <tr>
+                                    <td><%= scan.score %></td>
+                                </tr>
+                            </table>
+                        </section>
+                        <section id="foutmeldingen">
+                            <h3>Soorten foutmeldingen</h3>
+                            <div id="error-chart-<%= index %>" class="error-chart"></div>
+                            <table id="error-table-<%= index %>">
+                                <tr>
+                                <% scan.result.forEach(item => { %>
+                                    <th><%= item.title %></th>
+                                <% }); %>
+                                </tr>
+                                <tr>
+                                <% scan.result.forEach(item => { %>
+                                    <td><%= item.amount %></td>
+                                <% }); %>
+                                </tr>
+                            </table>
+                        </section>
+                        <section id="toegankelijkheid">
+                            <h3>Toegankelijkheid</h3>
+                            <div id="toegankelijkheids-chart-<%= index %>" class="toegankelijkheids-chart"></div>
+                            <table id="toegankelijkheids-table-<%= index %>">
+                                <tr>
+                                    <% scans.forEach(item => { %>
+                                        <th><%= item.date %></th>
+                                    <% }); %>
+                                </tr>
+                                <tr>
+                                    <% scans.forEach(item => { %>
+                                        <td class="<%= item.date === scan.date ? 'currentScan' : '' %>"><%= item.score %></td>
+                                    <% }); %>
+                                </tr>
+                            </table>
+                        </section>
+                        <section id="sidebar">
+                            <article>
+                                <h5><%= scan.result[0].title %></h5>                                     
+                                <div class="scan-results">
+                                    <p class="scan-score"><%= scan.result[0].amount %></p>
+                                    <picture>
+                                        <img src="../images/total-icon.svg" alt="Totale fouten icon">
+                                    </picture>
+                                </div>
+                            </article>
+                            <article>
+                                <h5><%= scan.result[1].title %></h5>
+                                <div class="scan-results">
+                                    <p class="scan-score"><%= scan.result[1].amount %></p>
+                                    <picture>
+                                        <img src="../images/contrast-icon.svg" alt="Contrast icon">
+                                    </picture>
+                                </div>
+                            </article>
+                            <article>
+                                <h5><%= scan.result[2].title %></h5>
+                                <div class="scan-results">
+                                    <p class="scan-score"><%= scan.result[2].amount %></p>
+                                    <picture>
+                                        <img src="../images/structureel-icon.svg" alt="Structureel icon">
+                                    </picture>
+                                </div>
+                            </article>
+                            <article>
+                                <h5><%= scan.result[3].title %></h5>                                     
+                                <div class="scan-results">
+                                    <p class="scan-score"><%= scan.result[3].amount %></p>
+                                    <picture>
+                                        <img src="../images/alt-teksten-icon.svg" alt="Alt teksten icon">
+                                    </picture>
+                                </div>
+                            </article>
+                            <article>
+                                <h5><%= scan.result[4].title %></h5>     
+                                <div class="scan-results">
+                                    <p class="scan-score"><%= scan.result[4].amount %></p>
+                                    <picture>
+                                        <img src="../images/aria-labels-icon.svg" alt="Aria labels icon">
+                                    </picture>
+                                </div>
+                            </article>
+                        </section>
                     </div>
-                <% }) %>
+                </div>
+            <% }) %>
+        </div>
     </main>
     <script>
         // Pass the scan data from EJS to JavaScript
